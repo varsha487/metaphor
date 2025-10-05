@@ -10,3 +10,5 @@ __pycache__/
 
 # Ignore node_modules (for JS projects)
 node_modules/
+
+.db
