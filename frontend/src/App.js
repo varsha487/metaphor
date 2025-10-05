@@ -97,7 +97,7 @@ function BooksList() {
     }
 
     // 3️⃣ Fetch book text from RapidAPI
-    const rapidApiUrl = `https://project-gutenberg-free-books-api1.p.rapidapi.com/books/${bookId}/text`;
+   
     const rapidApiRes = await axios.get(`http://localhost:5000/api/fetch_book_text/${bookId}`);
     const { title, content } = rapidApiRes.data;
 
@@ -107,13 +107,6 @@ function BooksList() {
       return;
     }
 
-
-
-    if (!content) {
-      console.log("No text content found for this book.");
-      setSearching(false);
-      return;
-    }
   
 
 const newBookRes = await axios.post("http://localhost:5000/api/books", {
