@@ -6,10 +6,10 @@ We both have always loved reading — from classic literature to modern poetry �
 ## What it does
 Metaphor reimagines how students experience literature.
 You can upload your notes, poems, or a book chapter, and our app instantly transforms it into something creative and easy to grasp:
-🖼️ Illustrations that visualize scenes and emotions
-📜 Retellings that simplify complex text into clear, modern storytelling
-🎵 Song suggestions that match the vibe or mood of the passage
-🤖 Smart AI assistant that answers your questions and explains difficult words, metaphors, or ideas
+- 🖼️ Illustrations that visualize scenes and emotions
+- 📜 Retellings that simplify complex text into clear, modern storytelling
+- 🎵 Song suggestions that match the vibe or mood of the passage
+- 🤖 Smart AI assistant that answers your questions and explains difficult words, metaphors, or ideas
 Learning becomes memorable, not miserable.
 ## How we built it
 We used Flask as our backend framework and React for frontend. We integrated Google’s Gemini 2.5 Flash model to handle text understanding, creative generation, and TTS (text-to-speech). We used Gutenberg’s API for book text and Spotify API for song widgets.
@@ -39,7 +39,7 @@ Combine creativity and engineering to make education engaging
 Work with Gutenberg API for book content
 ## What's next for Metaphor
 Next, we plan to add:
-🧩 Deeper literary analysis (themes, tone, symbols, and motifs)
-🗣️ Voice customization for narration - e.g., different voices for different characters
-💬 Interactive visual storytelling — turning retellings into moving comic panels
-🌍 Expansion to other subjects beyond literature
+- 🧩 Deeper literary analysis (themes, tone, symbols, and motifs)
+- 🗣️ Voice customization for narration - e.g., different voices for different characters
+- 💬 Interactive visual storytelling — turning retellings into moving comic panels
+- 🌍 Expansion to other subjects beyond literature
