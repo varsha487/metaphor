@@ -1,0 +1,12 @@
+# Ignore environment files
+.env
+
+# Ignore local database
+*.sqlite3
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore node_modules (for JS projects)
+node_modules/

@@ -1,0 +1,151 @@
+/* App.css */
+
+/* Reset some default styles */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* General button styles */
+button {
+  background-color: #25b09b;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #1e8c7f;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+button:disabled {
+  background-color: #a5d0c7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Headers */
+h1 {
+  font-size: 2rem;
+  color: #1e3a5f;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #1e3a5f;
+  margin-bottom: 12px;
+}
+
+/* Books list */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: background 0.2s ease;
+}
+
+ul li:hover {
+  background-color: #e6f2f1;
+}
+
+/* Left and right panels */
+.left-panel, .right-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.left-panel {
+  border-right: 1px solid #ccc;
+}
+
+.right-panel {
+  border-left: 1px solid #ccc;
+}
+
+/* Feature buttons container */
+.feature-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f0f9f8;
+  gap: 15px;
+}
+
+/* Feature content area */
+.feature-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  text-align: center;
+  background-color: #fdfdfd;
+  border-radius: 6px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
+}
+
+/* Audio and image display */
+.feature-content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.feature-content audio {
+  width: 100%;
+  margin-top: 10px;
+  outline: none;
+}
+
+/* Loader styling */
+.loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to { transform: rotate(1turn); }
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #f0f9f8;
+  height: 50px;
+  gap: 10px;
+}
