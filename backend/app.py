@@ -21,6 +21,8 @@ load_dotenv()  # loads from .env automatically
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 API_KEY = os.getenv("API_KEY")
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")  # store in .env
+RAPIDAPI_HOST = "project-gutenberg-free-books-api1.p.rapidapi.com"
 
 
 app = Flask(__name__)
@@ -36,6 +38,24 @@ from models import BookNote
 from models import Analysis
 from models import BookMusic
 
+@app.route("/api/fetch_book_text/<int:book_id>", methods=["GET"])
+def fetch_book_text(book_id):
+    try:
+        url = f"https://project-gutenberg-free-books-api1.p.rapidapi.com/books/{book_id}/text"
+        headers = {
+            "x-rapidapi-key": RAPIDAPI_KEY,
+            "x-rapidapi-host": RAPIDAPI_HOST
+        }
+        params = {"cleaning_mode": "super"}
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        return jsonify({
+            "title": data.get("title", ""),
+            "content": data.get("text", "")
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/api/annotations_pdf/<int:book_id>", methods=["GET"])
 def generate_annotations_pdf(book_id):
