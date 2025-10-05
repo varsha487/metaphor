@@ -7,6 +7,8 @@ import AnalysisDisplay from "./Analysis_Display";
 import ReactMarkdown from "react-markdown";
 import SpotifyEmbed from './SpotifyEmbed';
 
+let root = "https://metaphor-701l.onrender.com/"
+
 
 function Loader() {
   return (
@@ -86,7 +88,7 @@ function BooksList() {
     const bookId = bookResult.id;
 
     // 2️⃣ Check if book already exists in backend
-    const existing = await axios.get(`http://localhost:5000/api/books/${bookId}`).catch(() => null);
+    const existing = await axios.get(`${root}books/${bookId}`).catch(() => null);
 
     if (existing && existing.data) {
       console.log("Book already exists in DB:", existing.data);
@@ -98,7 +100,7 @@ function BooksList() {
 
     // 3️⃣ Fetch book text from RapidAPI
    
-    const rapidApiRes = await axios.get(`http://localhost:5000/api/fetch_book_text/${bookId}`);
+    const rapidApiRes = await axios.get(`${root}api/fetch_book_text/${bookId}`);
     const { title, content } = rapidApiRes.data;
 
     if (!content) {
@@ -109,7 +111,7 @@ function BooksList() {
 
   
 
-const newBookRes = await axios.post("http://localhost:5000/api/books", {
+const newBookRes = await axios.post(`${root}api/books`, {
   id: bookId,
   title,
   content
@@ -133,7 +135,7 @@ const newBookRes = await axios.post("http://localhost:5000/api/books", {
 
 
   useEffect(() => {
-  axios.get("http://localhost:5000/api/books")
+  axios.get(`${root}api/books`)
     .then(res => {
       // Sort alphabetically by title
       const sortedBooks = res.data.sort((a, b) => a.title.localeCompare(b.title));
@@ -252,7 +254,7 @@ function ReadBook() {
 
 useEffect(() => {
   if (!book) return;
-  axios.get(`http://localhost:5000/api/notes/${book.id}/${page}`)
+  axios.get(`${root}api/notes/${book.id}/${page}`)
     .then(res => setNotes(res.data))
     .catch(err => console.error("Error fetching notes:", err));
 }, [book, page]);
@@ -260,7 +262,7 @@ useEffect(() => {
 useEffect(() => {
   if (!book) return;
 
-  axios.get(`http://localhost:5000/api/analyses/${book.id}/${page}`)
+  axios.get(`${root}api/analyses/${book.id}/${page}`)
     .then(res => setAnalyses(res.data))
     .catch(err => console.error("Error fetching analyses:", err));
 }, [book, page]);
@@ -268,7 +270,7 @@ useEffect(() => {
 const handleAddNote = () => {
   if (!noteInput.trim()) return;
   
-  axios.post("http://localhost:5000/api/notes", {
+  axios.post(`${root}api/notes`, {
     book_id: book.id,
     page_number: page,
     content: noteInput
@@ -285,7 +287,7 @@ const handleFeature = (feature, pageText, pageNum) => {
   switch (feature) {
     case "image":
       setLoading(true);
-      axios.post("http://localhost:5000/api/render_text", {
+      axios.post(`${root}api/render_text`, {
         text: pageText,
         title: book.title,
         page_number: pageNum,
@@ -301,7 +303,7 @@ const handleFeature = (feature, pageText, pageNum) => {
 
     case "sound":
       setLoading(true);
-      axios.post("http://localhost:5000/api/render_sound", {
+      axios.post(`${root}api/render_sound`, {
         text: pageText,
         title: book.title,
         page_number: pageNum,
@@ -326,7 +328,7 @@ const handleFeature = (feature, pageText, pageNum) => {
       }
       console.log("Sending text to analyze:", selectedText);
       setLoading(true);
-      axios.post("http://localhost:5000/api/analyze_text", {
+      axios.post(`${root}api/analyze_text`, {
         text: selectedText,
         title: book.title,
         page_number: pageNum,
@@ -337,13 +339,13 @@ const handleFeature = (feature, pageText, pageNum) => {
           const newAnalysis = res.data.analysis;
               
               // Save analysis in backend database
-              axios.post("http://localhost:5000/api/analyses", {
+              axios.post(`${root}api/analyses`, {
                 book_id: book.id,
                 page_number: page,
                 analysis: newAnalysis
               }).then(() => {
                 // Refresh list of analyses
-                return axios.get(`http://localhost:5000/api/analyses/${book.id}/${page}`);
+                return axios.get(`${root}api/analyses/${book.id}/${page}`);
               }).then(res => setAnalyses(res.data));
 
             })
@@ -356,7 +358,7 @@ const handleFeature = (feature, pageText, pageNum) => {
 
 
     case "notes":
-      axios.post("http://localhost:5000/api/generate_notes", {
+      axios.post(`${root}api/generate_notes`, {
         text: pageText,
         title: book.title,
         page_number: pageNum,
@@ -371,7 +373,7 @@ const handleFeature = (feature, pageText, pageNum) => {
     setGeneratedImage(null);
     setGeneratedAudio(null);
 
-    axios.post("http://localhost:5000/api/generate_music", {
+    axios.post(`${root}api/generate_music`, {
       text: pageText,
       title: book.title,
       page_number: pageNum,
@@ -404,7 +406,7 @@ const handleChatSubmit = () => {
   
   console.log(chatLoading);
 
-  axios.post("http://localhost:5000/api/ask_gemini", {
+  axios.post(`${root}api/ask_gemini`, {
     book_id: book.id,
     page_number: page,
     message: chatInput,
@@ -424,7 +426,7 @@ const handleChatSubmit = () => {
 
 
 useEffect(() => {
-  axios.get(`http://localhost:5000/api/books/${id}`)
+  axios.get(`${root}api/books/${id}`)
     .then(res => {
       setBook(res.data);
 
@@ -497,7 +499,7 @@ useEffect(() => {
   if (!book || pages.length === 0) return;
 
   try {
-    const res = await axios.get(`http://localhost:5000/api/annotations/${book.id}`);
+    const res = await axios.get(`${root}api/annotations/${book.id}`);
     const { notes, analyses, images, audios, music } = res.data;
 
     let html = `<html><head>
@@ -573,7 +575,7 @@ useEffect(() => {
   >
     <div style={{ marginBottom: "10px" }}>
   <button
-  onClick={() => window.open(`http://localhost:5000/api/annotations_pdf/${book.id}`, "_blank")}
+  onClick={() => window.open(`${root}api/annotations_pdf/${book.id}`, "_blank")}
   style={{ padding: "8px 16px", backgroundColor: "#25b09b", color: "white", border: "none", borderRadius: "5px" }}
 >
   Print Annotations
