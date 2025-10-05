@@ -44,12 +44,14 @@ def fetch_book_text(book_id):
         url = f"https://project-gutenberg-free-books-api1.p.rapidapi.com/books/{book_id}/text"
         headers = {
             "x-rapidapi-key": RAPIDAPI_KEY,
-            "x-rapidapi-host": RAPIDAPI_HOST
+            "x-rapidapi-host": "project-gutenberg-free-books-api1.p.rapidapi.com"
         }
         params = {"cleaning_mode": "super"}
         response = requests.get(url, headers=headers, params=params)
+        
         response.raise_for_status()
         data = response.json()
+        print(data)
         return jsonify({
             "title": data.get("title", ""),
             "content": data.get("text", "")
@@ -435,4 +437,5 @@ def render_text():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
