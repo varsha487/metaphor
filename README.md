@@ -1,5 +1,6 @@
 # Metaphor
-    <link rel="shortcut icon" href="/favicon.ico" />
+   ![Metaphor Logo](frontend/public/favicon.ico)
+
 ## Inspiration
 We both have always loved reading — from classic literature to modern poetry — but also shared one common frustration: sometimes it’s so hard to understand. We’d spend hours trying to decode metaphors, symbols, and old-fashioned language. Since we also both love coding, we decided to merge our passions — literature and AI — to make reading not only easier but truly enjoyable. That’s how Team Metaphor was born.
 ## What it does
